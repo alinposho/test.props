@@ -1,0 +1,18 @@
+/target
+/classes
+/checkouts
+pom.xml
+pom.xml.asc
+*.jar
+*.class
+/.lein-*
+/.nrepl-port
+.hgignore
+.hg/
+
+# IDE specific files
+.classpath
+.project
+.idea
+*.iml
+/bin
