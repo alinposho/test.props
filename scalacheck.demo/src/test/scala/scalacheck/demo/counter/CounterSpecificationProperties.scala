@@ -55,4 +55,7 @@ object CounterSpecification extends Commands {
 
 object CounterSpecificationProperties extends Properties("counter") {
   property("Counter single threaded") = CounterSpecification.property()
+  // This should fail but it doesn't
+  property("Counter multithreaded threaded") = CounterSpecification.property(threadCount = 3)
 }
+
