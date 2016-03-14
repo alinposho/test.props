@@ -1,9 +1,10 @@
-(ns test.check.stateful-testing
+(ns test.check.stateful.stateful-testing
   (:require [clojure.test.check :as tc]
             [clojure.test.check.generators :as gen]
             [clojure.test.check.properties :as prop]))
 
 ;; Define the interface and implementation for our counter
+;; In the interest of the presentation, some code may have been duplicated
 
 (defprotocol CounterInterface
   (increment [this])
@@ -56,14 +57,6 @@
                   (doseq [c commands] (run c counter))
                   (= expected-final-state (get-value counter)))))
 
-(defn parallel-counter-property [create-counter]
-  (prop/for-all [commands (gen/not-empty (gen/vector state-generator))]
-                (let [counter (create-counter)
-                      initial-state (get-value counter)
-                      expected-final-state (compute-final-state initial-state commands)]
-                  (count (pmap #(run %1 counter) commands)) ;; If counter is not synchronized, we'll get an error
-                  (= expected-final-state (get-value counter)))))
-
 (deftype Counter [^:unsynchronized-mutable value]
   CounterInterface
   (increment [_] (set! value (+ value 1)))
@@ -101,5 +94,4 @@
   (tc/quick-check 100 (counter-property new-counter))
   ;; This will fail the test and we will notice the shrinking
   (tc/quick-check 1000 (counter-property new-erroneous-counter))
-  (tc/quick-check 1000 (parallel-counter-property new-counter))
   )
