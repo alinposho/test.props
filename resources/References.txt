@@ -1,3 +1,10 @@
 
-A good example of using test.check, with the SimpleCheck wrapper, augmenting regular unit tests
+A good example of using test.check, aka SimpleCheck, augmenting regular unit tests
 https://blog.8thlight.com/connor-mendenhall/2013/10/31/check-your-work.html
+
+Important to note that this is something to augment the unit tests, not completely replace them.
+
+
+TODO:
+- Find some background on QuickCheck
+- Maybe an example of "significantly" more advanced: http://www.quviq.com/index.html for Erlang, considering that I was not able to make the ScalaCheck concurrent test work as expected.
