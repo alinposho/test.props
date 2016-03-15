@@ -1,0 +1,3 @@
+
+A good example of using test.check, with the SimpleCheck wrapper, augmenting regular unit tests
+https://blog.8thlight.com/connor-mendenhall/2013/10/31/check-your-work.html
