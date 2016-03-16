@@ -45,7 +45,7 @@ object CounterSpecification extends Commands {
   }
 
   case object Get extends Command {
-    type Result = Int
+    type Result = Double
     def run(sut: Sut): Result = sut.get
     def nextState(state: State): State = state
     def preCondition(state: State): Boolean = true
@@ -56,6 +56,6 @@ object CounterSpecification extends Commands {
 object CounterSpecificationProperties extends Properties("counter") {
   property("Counter single threaded") = CounterSpecification.property()
   // This should fail but it doesn't
-  property("Counter multithreaded threaded") = CounterSpecification.property(threadCount = 3)
+  property("Counter multithreaded threaded") = CounterSpecification.property(threadCount = 4)
 }
 
