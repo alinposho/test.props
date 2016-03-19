@@ -17,9 +17,19 @@ class PositiveCounterRaceConditionSpec extends FlatSpec
 
 
   "PositiveInteger" should "have a race condition when decrementing" in {
-    val results = for(_ <- 1 to 100000) yield counterDecrementRaceConditionTest()
-    val successes = results.filter(_ < 0)
-    assert(successes.nonEmpty)
+    val triesUntilRaceCondition = Future {
+      var tries = 0
+      while (counterDecrementRaceConditionTest() >= 0) {
+        tries += 1
+        // Introduce a small delay
+        Thread.sleep(100)
+      }
+      tries
+    }
+
+    val tries = Await.result(triesUntilRaceCondition, 1.minute)
+    assert(tries > 0)
+    print(s"Tries until race condition=$tries")
   }
 
   def counterDecrementRaceConditionTest(): Double = {
