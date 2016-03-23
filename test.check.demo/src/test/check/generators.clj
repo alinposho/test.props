@@ -1,6 +1,5 @@
 (ns test.check.generators
-  (:require [clojure.test.check :as tc]
-            [clojure.test.check.generators :as gen]))
+  (:require [clojure.test.check.generators :as gen]))
 
 (defrecord User [user-name user-id email active?])
 
