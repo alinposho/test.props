@@ -1,6 +1,6 @@
 (ns test.check.stateful.counter)
 
-;; Define the interface and implementation for our counter
+;; Define the interface for our counter
 
 (defprotocol CounterInterface
   (increment [this])

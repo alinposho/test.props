@@ -85,13 +85,14 @@
   (reset-value c)
 
   (def i (Inc.))
-  (precondition i 1)
-  (next-state c)
+  (next-state i 3)
 
   (gen/sample (gen/elements [increment decrement get-value reset-value]) 1)
 
 
   (tc/quick-check 100 (counter-property new-counter))
   ;; This will fail the test and we will notice the shrinking
-  (tc/quick-check 1000 (counter-property new-erroneous-counter))
+  (tc/quick-check 100 (counter-property new-erroneous-counter))
+  (tc/quick-check 100 (counter-property new-erroneous-counter) :seed 1458766296670)
+  (tc/quick-check 1000 (counter-property new-erroneous-counter) :seed 1458766296670)
   )
