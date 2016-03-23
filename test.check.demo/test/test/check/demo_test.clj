@@ -1,6 +1,5 @@
 (ns test.check.demo-test
   (:require [clojure.test :refer :all]
-            [test.check.demo :refer :all]
             [clojure.test.check.generators :as gen]
             [clojure.test.check.properties :as prop]
             [clojure.test.check.clojure-test :refer :all]))
