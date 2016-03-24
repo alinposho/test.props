@@ -1,4 +1,4 @@
-(ns test.check.simple-failing-property
+(ns test.check.simple-failing-properties
   (:require [clojure.test.check :as tc]
             [clojure.test.check.generators :as gen]
             [clojure.test.check.properties :as prop]))

@@ -1,4 +1,4 @@
-(ns test.check.a-simple-example
+(ns test.check.simple-examples
   (:require [clojure.test.check :as tc]
             [clojure.test.check.generators :as gen]
             [clojure.test.check.properties :as prop]))
@@ -29,5 +29,6 @@
   (tc/quick-check 100 ascending-sorted-vector-prop)
   (tc/quick-check 100 descending-sorted-vector-prop)
   (tc/quick-check 100 min-is-smaller-than-all-elements :seed 1457950593723)
+  (tc/quick-check 1000 min-is-smaller-than-all-elements)
 
   )

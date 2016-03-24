@@ -16,7 +16,7 @@
 
 (defn new-thread-safe-counter [] (AtomicInteger. InitialValue))
 
-;; This does not work as epected since it does not compute the possible interleavings.
+;; This does not work as expected since it does not compute the possible interleavings.
 (defn parallel-counter-property [create-counter]
   (prop/for-all [commands (gen/not-empty (gen/vector state-generator))]
                 (let [counter (create-counter)

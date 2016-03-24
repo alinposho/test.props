@@ -1,17 +1,10 @@
 (ns test.check.stateful.stateful-testing
   (:require [clojure.test.check :as tc]
             [clojure.test.check.generators :as gen]
-            [clojure.test.check.properties :as prop]))
+            [clojure.test.check.properties :as prop]
+            [test.check.stateful.counter :refer :all]))
 
 ;; Define the interface and implementation for our counter
-;; In the interest of the presentation, some code may have been duplicated
-
-(defprotocol CounterInterface
-  (increment [this])
-  (decrement [this])
-  (get-value [this])
-  (reset-value [this]))
-
 (defprotocol Command
   (run [this sut])
   (next-state [this state]))
@@ -62,18 +55,18 @@
   (increment [_] (set! value (+ value 1)))
   (decrement [_] (set! value (- value 1)))
   (get-value [_] value)
-  (reset-value [_] (set! value 0)))
+  (reset-value [_] (set! value InitialValue)))
 
-(defn new-counter [] (Counter. 0))
+(defn new-counter [] (Counter. InitialValue))
 
 (deftype ErroneousCounter [^:unsynchronized-mutable value]
   CounterInterface
   (increment [_] (set! value (+ value 1)))
   (decrement [_] (set! value (- value (if (> value 3) 2 1))))
   (get-value [_] value)
-  (reset-value [_] (set! value 0)))
+  (reset-value [_] (set! value InitialValue)))
 
-(defn new-erroneous-counter [] (ErroneousCounter. 0))
+(defn new-erroneous-counter [] (ErroneousCounter. InitialValue))
 
 (comment
 
