@@ -54,5 +54,5 @@ object StackSpecificationProperties extends Properties("Stack") {
   overrideParameters(Test.Parameters.default.withWorkers(4))
 
   property("Stack single threaded") = StackSpecification.property()
-  property("Stack multithreaded threaded") = StackSpecification.property(threadCount = 2)
+//  property("Stack multithreaded threaded") = StackSpecification.property(threadCount = 2)
 }
