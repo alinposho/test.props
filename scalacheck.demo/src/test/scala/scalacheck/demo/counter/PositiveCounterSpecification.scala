@@ -77,7 +77,7 @@ object PositiveCounterSpecificationProperties extends Properties("positive-count
     // Run this in the Scala console
     //import scalacheck.demo.counter.PositiveCounterSpecification
     PositiveCounterSpecification.property().check
-    PositiveCounterSpecification.property(2).check(_.withWorkers(4).withMinSuccessfulTests(1000))
+    PositiveCounterSpecification.property(threadCount = 2).check(_.withWorkers(4).withMinSuccessfulTests(10000))
   }
 }
 
