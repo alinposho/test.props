@@ -10,7 +10,7 @@ import scala.util.{Success, Try}
 
 object StackSpecification extends Commands {
   override type State = Vector[Int]
-  override type Sut = java.util.Stack[Int]
+  override type Sut = java.util.Deque[Int]
 
   val commandGen: Gen[Command] = for {
     item <- arbitrary[Int]
@@ -25,7 +25,7 @@ object StackSpecification extends Commands {
 
   override def genInitialState: Gen[State] = Gen.containerOfN[Vector, Int](10, arbitrary[Int])
   override def newSut(state: State): Sut = {
-    val stack = new java.util.Stack[Int]()
+    val stack = new java.util.ArrayDeque[Int]()
     state foreach(v => stack.push(v))
     stack
   }
