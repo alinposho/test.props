@@ -5,11 +5,14 @@
 
 
 (def min-is-smaller-than-all-elements
-  (prop/for-all [v (gen/not-empty (gen/vector gen/int))]
-                (let [min-elem (apply min v)]
-                  (every? (fn [elem] (<= min-elem elem)) v))))
+  (prop/for-all [vctor (gen/not-empty (gen/vector gen/int))]
+                (let [min-elem (apply min vctor)]
+                  (every? (fn [elem] (<= min-elem elem)) vctor))))
 
 (comment
+
+  (apply min [2 5 4 1])
+
   (tc/quick-check 1000 min-is-smaller-than-all-elements)
   )
 
