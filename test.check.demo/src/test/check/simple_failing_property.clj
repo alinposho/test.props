@@ -14,7 +14,17 @@
                 (= (- x 1) (decrement x))))
 
 (comment
-
   (tc/quick-check 100 decrement-prop)
-
   )
+
+;; Test shrinking in action
+;; Totally contrieved property example
+(def prop-no-42
+  (prop/for-all [v (gen/vector gen/int)]
+                (not (some #{42} v))))
+
+(comment
+  (tc/quick-check 100 prop-no-42)
+  )
+
+
