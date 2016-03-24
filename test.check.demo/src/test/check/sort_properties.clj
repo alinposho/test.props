@@ -16,4 +16,13 @@
   )
 
 
+(def first-element-is-min-after-sorting
+  (prop/for-all [v (gen/not-empty (gen/vector gen/int))]
+                (= (apply min v)
+                   (first (sort v)))))
+
+(comment
+  (tc/quick-check 100 first-element-is-min-after-sorting)
+  )
+
 
