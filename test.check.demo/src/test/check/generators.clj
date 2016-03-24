@@ -10,18 +10,12 @@
   (gen/fmap (fn [[name domain-name]] (str name "@" domain-name))
             (gen/tuple (gen/not-empty gen/string-alphanumeric) domain)))
 
-(last (gen/sample email-gen))
-
 (def user-gen
   (gen/fmap (partial apply ->User)
             (gen/tuple (gen/not-empty gen/string-alphanumeric)
                        gen/nat
                        email-gen
                        gen/boolean)))
-
-(last (gen/sample user-gen))
-(clojure.pprint/pprint (gen/sample user-gen))
-
 
 (comment
 
@@ -31,6 +25,13 @@
 
   (gen/sample (gen/tuple gen/nat gen/boolean gen/ratio))
 
+
+  ;; Custom generators
   (gen/sample domain)
+
+  (last (gen/sample email-gen))
+
+  (last (gen/sample user-gen))
+  (clojure.pprint/pprint (gen/sample user-gen))
 
   )
